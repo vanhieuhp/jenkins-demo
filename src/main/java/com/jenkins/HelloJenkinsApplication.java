@@ -9,6 +9,7 @@ public class HelloJenkinsApplication {
     public static void main(String[] args) {
 
         SpringApplication.run(HelloJenkinsApplication.class, args);
+        System.out.println("Hello Jenkins");
         System.out.println("Greetings Workshop!");
         System.out.println("This is an example file");
         System.out.println("for use in workshop exercises.");
