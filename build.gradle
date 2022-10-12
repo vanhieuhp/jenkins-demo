@@ -11,6 +11,9 @@ sourceCompatibility = '1.8'
 bootJar {
     archiveFileName="hello-gradle"
 }
+build {
+    archiveFileName="hello-gradle.jar"
+}
 
 repositories {
     mavenCentral()
