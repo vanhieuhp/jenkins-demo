@@ -8,6 +8,10 @@ group = 'com.vanhieu'
 version = ''
 sourceCompatibility = '1.8'
 
+bootJar {
+    archiveFileName="hello-gradle"
+}
+
 repositories {
     mavenCentral()
 }
