@@ -1,2 +1,2 @@
 FROM gradle:latest
-copy {"./Dockerfile", "/home/gradle"}"
+copy {"./jenkins-demo/Dockerfile", "/home/gradle"}"
