@@ -7,7 +7,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class HelloWorldApplication {
 
     public static void main(String[] args) {
-        System.out.println("hello Gradle - 1234");
+        System.out.println("hello Gradle - vanhieu");
         SpringApplication.run(HelloWorldApplication.class, args);
     }
 
