@@ -3,6 +3,9 @@ node('slave1') {
     try {
         def tagName
         env.APPFILE = 'hello-gradle'
+        stage("source") {
+            git branch: 'gradle', url: 'https://github.com/vanhieuhp/jenkins-demo.git'
+        }
         stage('test') {
             sh './gradlew test'
         }
