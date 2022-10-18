@@ -1,0 +1,39 @@
+node('slave1') {
+    try {
+        def tagName
+        env.APPFILE = 'hello-gradle'
+        stage('test') {
+            sh './gradlew test'
+        }
+        stage('input-image-tag') {
+            def tag = input id: 'ctns-prompt', message:'Input your tag image!',
+                parameters: [string(defaultValue: 'latest', description: '',
+                name: 'tagName')]
+            tagName = tag['tagName']
+        }
+        stage('build images') {
+            sh "./gradlew bootBuildImage --imageName='$env.APPFILE:$tagName'"
+        }
+        stage('build container') {
+            sh "docker run -d --name hello-gradle --rm -p 8080:8080 $env.APPFILE:$tagName"
+        }
+    }
+    catch (err) {
+        currentBuild.result = 'FAILURE'
+    } finally {
+        stage('send to slack') {
+            if (${currentBuild.currentResult} == 'FAILURE') {
+                slackSend channel: '#jenkins-notification',
+                color: 'bad',
+                message: "Resutl Build: ${currentBuild.currentResult}",
+                tokenCredentialId: 'jenkins-test-slack'
+            }
+            else {
+                slackSend channel: '#jenkins-notification',
+                color: 'good',
+                message: "Resutl Build: ${currentBuild.currentResult}",
+                tokenCredentialId: 'jenkins-test-slack'
+            }
+        }
+    }
+}
