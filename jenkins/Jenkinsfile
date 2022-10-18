@@ -25,7 +25,7 @@ node('slave1') {
         currentBuild.result = 'FAILURE'
     } finally {
         stage('send to slack') {
-            if ('${ currentBuild.currentResult' } == 'FAILURE') {
+            if ('${currentBuild.currentResult}' == 'FAILURE') {
                 slackSend channel: '#jenkins-notification',
                 color: 'bad',
                 message: "Resutl Build: ${currentBuild.currentResult}",
